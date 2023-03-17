@@ -1,12 +1,18 @@
+// CORE
+import { useDispatch } from "react-redux";
+// ACTIONS
+import { checkedTodo, deleteTodo } from "../../store/todos/todos-actions";
 // STYLE
 import "./style.css";
 
-export const TodoItem = ({ id, title, checked, checkedTodo, deleteTodo }) => {
+export const TodoItem = ({ id, title, checked }) => {
+  const dispatch = useDispatch();
+
   const handlerChecked = () => {
-    checkedTodo(id);
+    dispatch(checkedTodo(id));
   };
   const handlerDelete = () => {
-    deleteTodo(id);
+    dispatch(deleteTodo(id));
   };
 
   return (

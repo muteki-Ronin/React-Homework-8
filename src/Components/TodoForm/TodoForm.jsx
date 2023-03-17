@@ -1,17 +1,23 @@
 // CORE
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+// ACTIONS
+import { addTodo } from "../../store/todos/todos-actions";
 // STYLE
 import "./style.css";
 
-export const TodoForm = ({ addTodo }) => {
-  const handlerSubmit = (event) => {
-    event.preventDefault();
-    addTodo({
-      id: uuidv4(),
-      title: event.target.title.value,
-      checked: false,
-    });
-    event.target.reset();
+export const TodoForm = () => {
+  const [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addTodo(inputValue));
+    setInputValue("");
   };
 
   return (
@@ -21,6 +27,8 @@ export const TodoForm = ({ addTodo }) => {
         type="text"
         placeholder="New todo"
         name="title"
+        onChange={handleChange}
+        value={inputValue}
       />
       <button className="form__button">Add</button>
     </form>

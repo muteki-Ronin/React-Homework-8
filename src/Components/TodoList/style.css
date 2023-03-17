@@ -3,3 +3,8 @@ ul {
   width: 100%;
 }
 
+.del-all_btn {
+    background-color: rgb(243, 32, 32);
+    padding: 10px;
+}
+
