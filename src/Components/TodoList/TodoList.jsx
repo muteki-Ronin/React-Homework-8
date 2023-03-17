@@ -26,6 +26,7 @@ export const TodoList = () => {
             id={todoItem.id}
             title={todoItem.title}
             checked={todoItem.checked}
+            edit={todoItem.edit}
           />
         ))}
       </ul>

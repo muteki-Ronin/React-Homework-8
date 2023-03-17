@@ -23,7 +23,15 @@
   color: rgb(186, 27, 27);
 }
 
+.edit-input {
+  margin-left: 10px;
+}
+
+.edit_btn {
+  background-color: rgb(243, 180, 32);
+  margin-right: 5px;
+}
+
 .del_btn {
   background-color: rgb(243, 32, 32);
-  padding: 10px;
 }

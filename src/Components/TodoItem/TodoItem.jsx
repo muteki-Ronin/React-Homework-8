@@ -1,16 +1,31 @@
 // CORE
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 // ACTIONS
-import { checkedTodo, deleteTodo } from "../../store/todos/todos-actions";
+import {
+  checkedTodo,
+  editTodo,
+  deleteTodo,
+} from "../../store/todos/todos-actions";
 // STYLE
 import "./style.css";
 
-export const TodoItem = ({ id, title, checked }) => {
+export const TodoItem = ({ id, title, checked, edit }) => {
+  const [inputValue, setInputValue] = useState(title);
   const dispatch = useDispatch();
 
   const handlerChecked = () => {
     dispatch(checkedTodo(id));
   };
+
+  const inputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handlerEdit = () => {
+    dispatch(editTodo(id, inputValue));
+  };
+
   const handlerDelete = () => {
     dispatch(deleteTodo(id));
   };
@@ -23,16 +38,23 @@ export const TodoItem = ({ id, title, checked }) => {
           onChange={handlerChecked}
           defaultChecked={checked}
         />
-        <p
-          className={
-            checked
-              ? "todo-item__desc todo-item__desc--checked"
-              : "todo-item__desc"
-          }
-        >
-          {title}
-        </p>
+        {edit ? (
+          <input className="edit-input" type="text" value={inputValue} onChange={inputChange} />
+        ) : (
+          <p
+            className={
+              checked
+                ? "todo-item__desc todo-item__desc--checked"
+                : "todo-item__desc"
+            }
+          >
+            {title}
+          </p>
+        )}
       </label>
+      <button className="edit_btn" onClick={handlerEdit}>
+        {edit ? "Save" : "Edit"}
+      </button>
       <button className="del_btn" onClick={handlerDelete}>
         Delete
       </button>
